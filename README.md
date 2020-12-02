@@ -9,6 +9,7 @@ My goal is to use machine learning algorithms for time series forecasting to for
 # DATA
 The data was procured from Kaggle. It consists of power ouput and weather data recorded from two separate power plants in India between May 15th, 2020 and June 17th, 2020; 34 days in total. One plant is located near Nashik, Maharashtra and the other near Gandikota, Andhra Pradesh. I had the following data for each plant:
 DATE_TIME: Date and timestamp of datapoint- taken every 15 minute
+
 SOURCE_KEY: Inverter ID (22 inverters in total)
 DC_POWER: DC power produced by inverter in that 15 minute interval (in kW)
 AC_POWER: AC power produced by inverter in that 15 minute interval (in kW)
