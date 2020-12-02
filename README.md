@@ -1,2 +1,1 @@
-# flatiron_capstone
-Phase 5 Capstone
+Readme and final notebook in progress.
