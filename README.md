@@ -6,17 +6,17 @@ By Ozair Ahmed
 
 
 ## Repo Navigation
-![Exploratory Notebooks](notebooks/exploratory)
+[Exploratory Notebooks](notebooks/exploratory)
 
-![Final Notebook](notebooks/report/final_notebook_my_thoughts_from_a_balcony.ipynb)
+[Final Notebook](notebooks/report/final_notebook_my_thoughts_from_a_balcony.ipynb)
 
-![Final Presentation](notebooks/report/solar_power_forecasting.pdf)
+[Final Presentation](notebooks/report/solar_power_forecasting.pdf)
 
-![Project Data](data)
+[Project Data](data)
 
-![Conda Environment](env_libraries_and_versions.txt)
+[Conda Environment](env_libraries_and_versions.txt)
 
-![Project Visuals](data/figures)
+[Project Visuals](data/figures)
 
 
 ## INTRODUCTION
@@ -110,9 +110,9 @@ I used the same parameters above to instanciate another SARIMA model, and fit it
 
 ![sarima_forecast](data/figures/sarima_forecast.png)
 
-18th Jun Forecasted Output per SARIMA:  ~125000 kW
+18th Jun Forecasted Output per SARIMA:  ~125,000 kW
 
-19th Jun Forecasted Output per SARIMA:  ~119000 kW
+19th Jun Forecasted Output per SARIMA:  ~119,000 kW
 
 
 ### Facebook PROPHET
@@ -136,9 +136,9 @@ Fitting the model to the entire 5 day output data, resulted in the follwoing for
 
 ![prophet_forecast](data/figures/prophet_forecast.png)
 
-18th Jun Forecasted Output per PROPHET:  ~146000 kW
+18th Jun Forecasted Output per PROPHET:  ~146,000 kW
 
-19th Jun Forecasted Output per PROPHET:  ~140000 kW
+19th Jun Forecasted Output per PROPHET:  ~140,000 kW
 
 
 ### SARIMAX
@@ -166,9 +166,9 @@ As with SARIMA, we fit data from all 5 days into another instace of the model an
 
 ![sarimax_forecast](data/figures/sarimax_forecast.png)
 
-18th Jun Forecasted Output:  ~129000 kW
+18th Jun Forecasted Output:  ~129,000 kW
 
-19th Jun Forecasted Output:  ~126000 kW
+19th Jun Forecasted Output:  ~126,000 kW
 
 
 ## Model Evaluation
