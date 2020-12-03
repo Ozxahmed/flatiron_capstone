@@ -71,7 +71,7 @@ I then confirmed non-stationarity of my data by doing the Dicky-Fuller test, whi
 
 One of the hyperparameters within SARIMA allows us to address the non-stationarity of our data, the differencing order. To find the optimum hyperparameters, I used AUTO-ARIMA, an algorithm which cycles through various combination of hyperparameters to find the best order for forecasting.
 
-#### Modeling
+#### SARIMA- Modeling
 Once I found the optimum parameters for my dataset, I instanciated an instance of the model, fit my training data (6/13 to 6/16) to it, predicted daily yield for 6/17, and then compared this against the actual daily yield in my test set for 6/17. Following are the performance metrics for my SARIMA model:
 
 SARIMA train R2 Score: 0.984636
@@ -88,9 +88,20 @@ SARIMA test RMSE Score: 4836.309328
 
 ![sarima_model_plot](data/figures/sarima_pred.png)
 
-#### Forecasting 2 days
+#### SARIMA- Forecasting 2 days
+I used the same parameters above to instanciate another SARIMA model, and fit it to the entire daily yield data from the previous 5 days. And then forecasted daily yield for 6/18 and 6/19. Per my SARIMA forecast: 
+
+18th Jun Forecasted Output:  124556.0 kW
+
+19th Jun Forecasted Output:  119373.0 kW
+
+[sarima_forecast](data/figures/sarima_forecast.png)
 
 
+### Facebook PROPHET
+PROPHET is an open source library by Facebook which can be used for time series forecasting. It is more intuitive than SARIMAX, and also faster.
+
+It requires the data that we feed it to have 2 columns: **ds** (with date_time values) & **y** (the time series feature). 
 
 
 ## FUTURE IMPROVEMENT IDEAS
