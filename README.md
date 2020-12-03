@@ -71,8 +71,8 @@ I then confirmed non-stationarity of my data by doing the Dicky-Fuller test, whi
 
 One of the hyperparameters within SARIMA allows us to address the non-stationarity of our data, the differencing order. To find the optimum hyperparameters, I used AUTO-ARIMA, an algorithm which cycles through various combination of hyperparameters to find the best order for forecasting.
 
-#### SARIMA- Modeling
-Once I found the optimum parameters for my dataset, I instanciated an instance of the model, fit my training data (6/13 to 6/16) to it, predicted daily yield for 6/17, and then compared this against the actual daily yield in my test set for 6/17. Following are the performance metrics for my SARIMA model:
+#### SARIMA- Model
+Once I found the optimum parameters for my dataset, I instanciated an instance of the model, fitted it to the training data (6/13 to 6/16), predicted daily yield for 6/17, and then compared this against the actual daily yield in my test set for 6/17. Following are the performance metrics for my SARIMA model:
 
 SARIMA train R2 Score: 0.984636
 
@@ -88,20 +88,42 @@ SARIMA test RMSE Score: 4836.309328
 
 ![sarima_model_plot](data/figures/sarima_pred.png)
 
-#### SARIMA- Forecasting 2 days
+#### SARIMA- Two Day Output Forecast
 I used the same parameters above to instanciate another SARIMA model, and fit it to the entire daily yield data from the previous 5 days. And then forecasted daily yield for 6/18 and 6/19. Per my SARIMA forecast: 
 
-18th Jun Forecasted Output:  124556.0 kW
+![sarima_forecast](data/figures/sarima_forecast.png)
 
-19th Jun Forecasted Output:  119373.0 kW
+18th Jun Forecasted Output per SARIMA:  ~125000 kW
 
-[sarima_forecast](data/figures/sarima_forecast.png)
+19th Jun Forecasted Output per SARIMA:  ~119000 kW
 
 
 ### Facebook PROPHET
 PROPHET is an open source library by Facebook which can be used for time series forecasting. It is more intuitive than SARIMAX, and also faster.
 
-It requires the data that we feed it to have 2 columns: **ds** (with date_time values) & **y** (the time series feature). 
+It requires the data that we feed it to have 2 columns: **ds** (with date_time values) & **y** (the time series feature). So I transformed my training and test data to the required format.
+
+#### PROPHET- Model
+Once I had my datasets prepped, I instanciated the model, fitted it to the training data, predicted output for 6/17, and compared it to the actualy output in the test dataset. Performance metrics for my PROPHET model:
+
+Prophet Test R2 Score: 0.941193
+
+Prophet Test MAE Score: 7681.413889
+
+Prophet Test RMSE Score: 13927.544700
+
+![prophet_pred_model](data/figures/prophet_pred_model)
+
+#### PROPHET- Two Day Output Forecast
+
+Fitting the model to the entire 5 day output data, resulted in the follwoing forecast:
+
+![prophet_forecast](data/figures/prophet_forecast.png)
+
+18th Jun Forecasted Output per PROPHET:  146000 kW
+
+19th Jun Forecasted Output per PROPHET:  140000 kW
+
 
 
 ## FUTURE IMPROVEMENT IDEAS
