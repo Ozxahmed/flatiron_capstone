@@ -30,6 +30,19 @@ My goal is to use machine learning algorithms for time series forecasting to for
 
 I'm going to use the data from the last 5 days of my dataset to train & test my models, and then forecast the next 2 days. Anything more than 2 days and the accuracy starts dropping significantly, as will be evident by looking at the confidence intervals in my model plots below. For my final model, where I use ambient temperature as an additional feature, I'm going to get historical weather data that goes beyond the weather data contained within the dataset I acquired, and use it to forecast output.
 
+### Conda Environment
+[Anaconda](https://docs.anaconda.com/anaconda/install/) is required to run the code in this project. Once installed, download and install the [env_libraries_and_versions.txt](env_libraries_and_versions.txt) file by running one of the following commands in your terminal:
+```bash
+# using pip
+pip install -r env_libraries_and_versions.txt
+# using Conda
+conda create --name <env_name> --file env_libraries_and_versions.txt
+conda activate <env_name>
+```
+
+More instructions can be found [here](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+
+
 
 ## DATA UNDERSTANDING & PREPARATION
 The data was procured from Kaggle. It consists of power ouput and weather data recorded from two separate power plants in India between May 15th, 2020 and June 17th, 2020; 34 days in total. One plant is located near Nashik, Maharashtra and the other near Gandikota, Andhra Pradesh. I had the following data for each plant:
