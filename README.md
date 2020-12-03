@@ -12,6 +12,8 @@ By Ozair Ahmed
 
 [Final Presentation](notebooks/report/solar_power_forecasting.pdf)
 
+[Final PDF Reports](reports)
+
 [Project Data](data)
 
 [Conda Environment](env_libraries_and_versions.txt)
