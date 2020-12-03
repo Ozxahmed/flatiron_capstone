@@ -38,26 +38,59 @@ For the sake of simplicity, I only used data from the first power plant, the goa
 #### Stationarity
 Looking at the power output data from plant 1, I found that it was not stationary, as can be seen in the plot below- the 3rd plot shows daily seasonality, which makes sense since the power output peaks during the day when the sun is out, and drops during the night. When doing time series modeling, it is important that the data is stationary, in that its statisitcal properties, such as mean, variance, etc, remain constant over time. This is because if the dataset shows particular behavior over time, there is a very high probabilty that it will follow a similar behaviour in the future. I will take care of this within the parameters of each model.
 
-![seasonal_decomp](data/figures/seasonal_decomp_plant_1_output.png)
+![seasonal_decomp](data/figures/seasonal_decomp.png)
 
+#### Data Preparation
+I set the data_time column as the index in each of the two datasets for plant 1(power output & weather sensor), after which I isolated the last 5 days of data from each dataset, and then merged them on the index. I only kept two columns: the daily yield and the ambient temperature, since those were the only two features I'd be using within the scope of this project. I then split this dataframe into a training set, holding the first 80% of the data, and a test holdout set with the remaining 20% of the data, as displayed below:
+
+![train_test_data_split](data/figures/train_test_data.png)
 
 #### Missing Rows
+The power output from above was missing two rows, specifically: 6:15am and 6:30am from June 17th. I added these rows manually with the daily yield of 0, since the daily yield during this time in the one day prior and after was 0
 
+#### Performance Metrics
+I used the following metrics to analyse model performance:
+- R squared (R2), or coefficient of determination, is a statistical measure of how well the regression line approximates the real values. It goes from 0 to 1, and the higher the value the better the performance
+- Mean Absolute Error (MAE) is the average of the absolute error, or positive difference, between the predicted and observed value. Here we want to minimize MAE.
+- Residual Mean Squared Error (RMSE) is similar to MAE, but the errors are squared, giving more weight to outliers. And as with MAE, we want to minimize this.
+
+
+Once I had my dataframe with 5 days of data with the feature columns ready, along with it split into a training and testing set, I was now ready to proceed with time series forecasting.
 
 
 ## FORECASTING SOLAR POWER OUTPUT- OVERVIEW
-I used 3 time series algorithms to forecast power output: SARIMA, Facebook PROPHET, and SARIMAX. I used 5 days of data, 6/13/2020 to 6/17/2020, to train and test the models, and then forecasted 2 days ahead. For the first two models, I only used the power ouput data, and for the third model, SARIMAX, I introduced ambient temperature as an exogenous variable to see if it would help my model forecast better.
+I used three time series algorithms to forecast power output: SARIMA, Facebook PROPHET, and SARIMAX. I have a brief explanation of each algorithm in their respective sections below. As stated above, I used 5 days of data, 6/13/2020 to 6/17/2020, which I prepared above to train and test the models, and then forecasted 2 days ahead, 6/18 and 6/19. For the first two models, I did univariate time searies forecasting using only the previously recorded power ouput data to forecastf forward; and for the third model, SARIMAX, I introduced ambient temperature as an exogenous variable to help with forecasting.
 
 
 ### SARIMA
-I started by first checking for seasonality by doing the Dicky-Fuller test on my power output dataset. When doing time series analysis, it is important that we don't have seasonality. Here, my p-value was greater than 0.05, meaning it had failed the test, and therefore this dataset had seasonality. I confirmed this by doing a seasonal decomposition, where we can see that there is at least a daily seasonality. 
+SARIMA stands for Seasonal AutoRegressive Integrated Moving Average, and is a very popular time series forecasting model. It is great for univariate time series forecasting, and the seasonal component works with non-stationary data- it takes care of the stationarity within the model.
+
+Since I was only going to use daily yield to make my forecast in this model, I isolated that feature within both my training and test datasets.
+
+I then confirmed non-stationarity of my data by doing the Dicky-Fuller test, which is a statistical test for checking stationarity. The test assumes a null-hypothesis that the time series is not stationary. So if the test statistics is less than the critical value, we then reject that null hypothesis and say that the series is stationary. The test on our data returned a test statistic greater than the critical value at 5%, confirming that our dataset is NOT stationary. 
+
+One of the hyperparameters within SARIMA allows us to address the non-stationarity of our data, the differencing order. To find the optimum hyperparameters, I used AUTO-ARIMA, an algorithm which cycles through various combination of hyperparameters to find the best order for forecasting.
+
+#### Modeling
+Once I found the optimum parameters for my dataset, I instanciated an instance of the model, fit my training data (6/13 to 6/16) to it, predicted daily yield for 6/17, and then compared this against the actual daily yield in my test set for 6/17. Following are the performance metrics for my SARIMA model:
+
+SARIMA train R2 Score: 0.984636
+
+SARIMA test R2 Score: 0.992781
+
+SARIMA train MAE Score: 1271.469147
+
+SARIMA test MAE Score: 3392.311740
+
+SARIMA train RMSE Score: 8481.602910
+
+SARIMA test RMSE Score: 4836.309328
+
+![sarima_model_plot](data/figures/sarima_pred.png)
+
+#### Forecasting 2 days
 
 
-
-I then plotted the ACF (Auto Correlation Function) and PACF (Partial Auto Correlation Function) plot to get an idea of what values to use for my AR and MA components.
-
-## METRICS
-coefficient of determination, or R squared, is a statistical measure of how well the regression line approximates the real values.
 
 
 ## FUTURE IMPROVEMENT IDEAS
