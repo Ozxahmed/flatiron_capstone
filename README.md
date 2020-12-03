@@ -2,6 +2,23 @@
 By Ozair Ahmed
 
 
+![solar_farm_pic](data/figures/solar_farm_pic.jpg)
+
+
+## Repo Navigation
+![Exploratory Notebooks](notebooks/exploratory)
+
+![Final Notebook](notebooks/report/final_notebook_my_thoughts_from_a_balcony.ipynb)
+
+![Final Presentation](notebooks/report/solar_power_forecasting.pdf)
+
+![Project Data](data)
+
+![Conda Environment](env_libraries_and_versions.txt)
+
+![Project Visuals](data/figures)
+
+
 ## INTRODUCTION
 Traditional power plants can control how much power they produce which allows for power grid operators to easily manage supply and demand. However, most of these traditioanl power plants are coal powered, which are a massive source of air pollution. Integrating renewable energy power plants into the grid would greatly help reduce pollution, however renewable energy sources like solar and wind have variable output since they depend on other factors, primarily the weather. For example, a solar farm will produce more electricity on sunny days than on cloudy days, and this makes it difficult for grid operators to manage supply and demand. Forecasting power output for variable renewable energy sources can help here in that the operators can then know how much power to expect in the future, and if it isn't enough to meet the demand, they can have a traditional power plant on standby, and power it up when the the supply dips below what is needed. The idea here is that by forecasting power output of a solar plant, we can balance it with other sources of power generation. 
 
@@ -112,28 +129,59 @@ Prophet Test MAE Score: 7681.413889
 
 Prophet Test RMSE Score: 13927.544700
 
-![prophet_pred_model](data/figures/prophet_pred_model)
+![prophet_pred_model](data/figures/prophet_pred_model.png)
 
 #### PROPHET- Two Day Output Forecast
-
 Fitting the model to the entire 5 day output data, resulted in the follwoing forecast:
 
 ![prophet_forecast](data/figures/prophet_forecast.png)
 
-18th Jun Forecasted Output per PROPHET:  146000 kW
+18th Jun Forecasted Output per PROPHET:  ~146000 kW
 
-19th Jun Forecasted Output per PROPHET:  140000 kW
+19th Jun Forecasted Output per PROPHET:  ~140000 kW
 
+
+### SARIMAX
+This is the same algorithm as SARIMA; the 'X' here stands for exogenous. These are variables, which in my case here is the ambient temperature, we can add in addition to the endogenous variable, or the main feature which in my case is the daily yield, to help the model predict and forecast better.
+
+#### SARIMAX- Model
+The modeling workflow is the same as that for SARIMA, except we add ambient temperature as an exogenous variable within the hyperparameters. The following are the performance parameters: 
+
+SARIMAX train R2 Score: 0.986672
+
+SARIMAX test R2 Score: 0.993385
+
+SARIMAX train MAE Score: 1244.521925
+
+SARIMAX test MAE Score: 3282.352611
+
+SARIMAX train RMSE Score: 7899.641976
+
+SARIMAX test RMSE Score: 4629.702527
+
+![sarimax_pred](data/figures/sarimax_pred.png)
+
+#### SARIMAX- Two Day Output Forecast
+As with SARIMA, we fit data from all 5 days into another instace of the model and forecast forward:
+
+![sarimax_forecast](data/figures/sarimax_forecast.png)
+
+18th Jun Forecasted Output:  ~129000 kW
+
+19th Jun Forecasted Output:  ~126000 kW
+
+
+## Model Evaluation
+Of the three models, SARIMAX performed the best, which is understandable given that it has extra features to help it better predict and forecast. SARIMA was a very, very close 2nd, and while PROPHET came last, it still scored really well. What this tells me is that the data was extremely clean and easy for the model to use to predict and forecast.
 
 
 ## FUTURE IMPROVEMENT IDEAS
-- LSTM Neural Network
-- Download more historical weather data parameters, such as humidity, precipitation, windspeed, and cloudcover, and see correlations between these parameters vs. solar power production vs. irradiation
-- Extend my analysis and modeling to wind farms
-- Looking at the correlation between weather params, look at locations around the world best for solar and wind farms.
-- Package model that it can be deployed.
+- I would like to try an LSTM Neural Network model to see how it performs against SARIMAX. 
+- I want to acquire more historical weather data parameters, such as humidity, precipitation, windspeed, and cloudcover, and see correlations between these parameters vs. power production.
+- I'd like to apply my forecasting modeling here to wind power plants
+- Building upon the weather parameter vs power output correlation, looking for places around the world best suited for solar or wind farms. 
+- Package my model in a manner which can be deployed online.
 
-Notes:
-polish over brilliance- clean and concise narrative of what I did.
-focus on producing clean work right now
-do break down the concepts, employers will appreciate that
+## REFERENCES
+- Kaggle datasource: https://www.kaggle.com/anikannal/solar-power-generation-data
+- Historical Weather Data: https://www.visualcrossing.com/weather/weather-data-services#/loadingscreen
