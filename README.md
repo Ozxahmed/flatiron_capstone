@@ -6,17 +6,17 @@ By Ozair Ahmed
 
 
 ## Repo Navigation
-![Exploratory Notebooks](notebooks/exploratory)
+[Exploratory Notebooks](notebooks/exploratory)
 
-![Final Notebook](notebooks/report/final_notebook_my_thoughts_from_a_balcony.ipynb)
+[Final Notebook](notebooks/report/final_notebook_my_thoughts_from_a_balcony.ipynb)
 
-![Final Presentation](notebooks/report/solar_power_forecasting.pdf)
+[Final Presentation](notebooks/report/solar_power_forecasting.pdf)
 
-![Project Data](data)
+[Project Data](data)
 
-![Conda Environment](env_libraries_and_versions.txt)
+[Conda Environment](env_libraries_and_versions.txt)
 
-![Project Visuals](data/figures)
+[Project Visuals](data/figures)
 
 
 ## INTRODUCTION
